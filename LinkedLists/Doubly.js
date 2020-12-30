@@ -9,11 +9,12 @@ class LinkedList {
 
   constructor(node){
     this.head = node
+    this.tail = null
     this.size = 1
   }
 
-  insertAtHead(node){ 
-    
+  insertAtHead(node){
+
     if(this.head === null){
       this.head = node
     }
@@ -30,9 +31,9 @@ class LinkedList {
     let currentNode = this.head
     if(currentNode.value === value){
       let newNode = new Node(valueToInsert)
-      
       newNode.next = this.head
       this.head = newNode
+      this.setTail()
       return
     }
     while(currentNode !== null){
@@ -40,6 +41,7 @@ class LinkedList {
         let newNode = new Node(valueToInsert)
         currentNode.prev.next = newNode
         newNode.next = currentNode
+        this.setTail()
         return
       }
       currentNode = currentNode.next
@@ -53,6 +55,7 @@ class LinkedList {
     currentNode.next = node
     node.prev = currentNode
     this.size++
+    this.setTail()
   }
 
   printNodes(){
@@ -63,7 +66,15 @@ class LinkedList {
       currentNode = currentNode.next
     }
   }
-  
+
+  setTail(){
+    let currentNode = this.head
+    while(currentNode.next !== null){
+      currentNode = currentNode.next
+    }
+    this.tail = currentNode
+  }
+
 }
 
 const node1 = new Node(1)
