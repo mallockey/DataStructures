@@ -12,6 +12,14 @@ class LinkedList {
     this.size = 1
   }
 
+  print(){
+    let currentNode = this.head
+    while(currentNode){
+      console.log(currentNode.value)
+      currentNode = currentNode.next
+    }
+  }
+
   clear(){
     this.head = null
   }
@@ -84,6 +92,44 @@ class LinkedList {
     }
   }
 
+  insertAtValueAgain(data,position){
+    let newNode = new Node(data)
+    if(position === 0){
+      newNode.next = this.head
+      this.head = newNode  
+      return
+    }
+    let currentNode = this.head.next
+    let previousNode =  this.head
+    let i = 1
+    while(currentNode){
+      if(i === position){
+        newNode.next = currentNode
+        previousNode.next = newNode
+      }
+      previousNode = currentNode
+      currentNode = currentNode.next
+      i++
+    }
+  }
+
+
+  reverseList(head){
+    
+    let previousNode = null
+    let currentNode = head
+    let next = null
+
+    while(currentNode !== null){
+      next = currentNode.next
+      currentNode.next = previousNode
+      previousNode = currentNode
+      currentNode = next
+    }
+
+    this.head = previousNode
+  }
+
   addToHead(node){
     node.next = this.head
     this.head = node
@@ -103,9 +149,9 @@ class LinkedList {
 
 }
 
-const arr = [5,6,7,8,9]
+const arr = [1,2,3]
 const arrToList = LinkedList.arrayToLinkedList(arr)
 
-arrToList.insertAtValue(6,100)
-
-console.log(arrToList)
+console.log("=============")
+arrToList.reverseList(arrToList.head)
+arrToList.print()
