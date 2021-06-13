@@ -1,67 +1,66 @@
 class Node {
-  constructor(data){
+  constructor(data) {
     this.value = data
     this.next = null
   }
 }
 
 class LinkedList {
-
-  constructor(node){
+  constructor(node) {
     this.head = node
     this.size = 1
   }
 
-  print(){
+  print() {
     let currentNode = this.head
-    while(currentNode){
+    while (currentNode) {
       console.log(currentNode.value)
       currentNode = currentNode.next
     }
   }
 
-  clear(){
+  clear() {
     this.head = null
   }
 
-  getFirstNode(){
+  getFirstNode() {
     return {
-      value : this.head.value
+      value: this.head.value,
     }
   }
 
-  getLastNode(){
+  getLastNode() {
     let currentNode = this.head
-    while(currentNode.next !== null){
+    while (currentNode.next !== null) {
       currentNode = currentNode.next
     }
     return currentNode
   }
 
-  add(node){
+  add(node) {
     let lastNode = this.getLastNode()
     lastNode.next = node
     this.size++
   }
 
-  removeHead(){
+  removeHead() {
     this.head = this.head.next
     this.size--
   }
 
-  removeFromValue(value){
-    if(this.head.value === value){
+  removeFromValue(value) {
+    if (this.head.value === value) {
       this.head = this.head.next
-    }else{
+    } else {
       let previousNode = this.head
       let currentNode = previousNode.next
 
-      while(currentNode){
-        if(currentNode.value === value){
+      while (currentNode) {
+        if (currentNode.value === value) {
           previousNode.next = currentNode.next
           this.size--
           break
-        }else{
+        } else {
           previousNode = currentNode
           currentNode = currentNode.next
         }
@@ -69,20 +68,18 @@ class LinkedList {
     }
   }
 
-  insertAtValue(value,valueToInsert){
-
+  insertAtValue(value, valueToInsert) {
     let newNode = new Node(valueToInsert)
-    if(this.head.value === value){
+    if (this.head.value === value) {
       let tmp = this.head
       newNode.next = tmp
       this.head = newNode
-    }else{
+    } else {
       let previousNode = this.head
       let currentNode = this.head.next
 
-      while(currentNode){
-        if(currentNode.value === value){
-
+      while (currentNode) {
+        if (currentNode.value === value) {
           previousNode.next = newNode
           newNode.next = currentNode
         }
@@ -92,18 +89,18 @@ class LinkedList {
     }
   }
 
-  insertAtValueAgain(data,position){
+  insertAtValueAgain(data, position) {
     let newNode = new Node(data)
-    if(position === 0){
+    if (position === 0) {
       newNode.next = this.head
-      this.head = newNode  
+      this.head = newNode
       return
     }
     let currentNode = this.head.next
-    let previousNode =  this.head
+    let previousNode = this.head
     let i = 1
-    while(currentNode){
-      if(i === position){
+    while (currentNode) {
+      if (i === position) {
         newNode.next = currentNode
         previousNode.next = newNode
       }
@@ -113,14 +110,12 @@ class LinkedList {
     }
   }
 
-
-  reverseList(head){
-    
+  reverseList(head) {
     let previousNode = null
     let currentNode = head
     let next = null
 
-    while(currentNode !== null){
+    while (currentNode !== null) {
       next = currentNode.next
       currentNode.next = previousNode
       previousNode = currentNode
@@ -130,28 +125,27 @@ class LinkedList {
     this.head = previousNode
   }
 
-  addToHead(node){
+  addToHead(node) {
     node.next = this.head
     this.head = node
   }
 
-  static arrayToLinkedList(arr){
+  static arrayToLinkedList(arr) {
     let headNode = new Node(arr[0])
     let newList = new LinkedList(headNode)
 
-    for(let i = 1; i < arr.length; i++){
+    for (let i = 1; i < arr.length; i++) {
       let newNode = new Node(arr[i])
       newList.add(newNode)
     }
 
     return newList
   }
-
 }
 
-const arr = [1,2,3]
+const arr = [1, 2, 3]
 const arrToList = LinkedList.arrayToLinkedList(arr)
 
-console.log("=============")
+console.log('=============')
 arrToList.reverseList(arrToList.head)
 arrToList.print()

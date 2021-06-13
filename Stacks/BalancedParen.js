@@ -1,4 +1,2 @@
 const Stack = require('./Stacks')
-const myStack = new Stack
-
-
+const myStack = new Stack()
