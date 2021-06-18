@@ -143,9 +143,7 @@ class LinkedList {
   }
 }
 
-const arr = [1, 2, 3]
-const arrToList = LinkedList.arrayToLinkedList(arr)
-
-console.log('=============')
-arrToList.reverseList(arrToList.head)
-arrToList.print()
+module.exports = {
+  LinkedList,
+  Node,
+}
