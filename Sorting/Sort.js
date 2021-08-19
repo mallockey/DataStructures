@@ -36,6 +36,33 @@ function bubbleSort(arr) {
   return arr
 }
 
+function quickSort(arr) {
+  function subSort(left, right) {
+    //what is out helper method?
+    if (left >= right) {
+      return
+    }
+    let pivot = arr[right]
+    let wall = left
+
+    for (let i = left; i < right; i++) {
+      if (arr[i] < pivot) {
+        //what do we swap??
+        ;[arr[i], arr[wall]] = [arr[wall], arr[i]]
+        wall++
+      }
+    }
+    ;[arr[right], arr[wall]] = [arr[wall], arr[right]]
+
+    subSort(left, wall - 1)
+    subSort(wall + 1, right)
+  }
+
+  subSort(0, arr.length - 1)
+  return arr
+}
+
 module.exports = {
   bubbleSort,
+  quickSort,
 }
